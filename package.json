@@ -1,0 +1,32 @@
+{
+  "name": "@acrodata/gradient-parser",
+  "version": "1.0.0",
+  "description": "CSS gradient parser",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acrodata/gradient-parser.git"
+  },
+  "author": "nzbin<nzb329@163.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acrodata/gradient-parser/issues"
+  },
+  "homepage": "https://github.com/acrodata/gradient-parser#readme",
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.0",
+    "rimraf": "^6.0.0",
+    "typescript": "~5.9.0"
+  }
+}
