@@ -1,6 +1,10 @@
+import { parseConicGradient, stringifyConicGradient } from './conic';
+import { parseLinearGradient, stringifyLinearGradient } from './linear';
+import { parseRadialGradient, stringifyRadialGradient } from './radial';
 import {
   Color,
   ColorStop,
+  GradientResult,
   HueInterpolationMethod,
   PositionKeyword,
   PositionPropertyValue,
@@ -147,4 +151,43 @@ export function resolveColorInterp(input: string): Color {
     space: space as Color['space'],
     method: method.length > 0 ? (method.join(' ') as HueInterpolationMethod) : undefined,
   };
+}
+
+/**
+ * A unified function for parsing all gradient types.
+ *
+ * @param input
+ */
+export function parseGradient(input: string) {
+  try {
+    if (input.includes('linear')) {
+      return parseLinearGradient(input);
+    } else if (input.includes('radial')) {
+      return parseRadialGradient(input);
+    } else if (input.includes('conic')) {
+      return parseConicGradient(input);
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+}
+
+/**
+ * A unified function for stringify all gradient types.
+ *
+ * @param input
+ */
+export function stringifyGradient(input: GradientResult) {
+  if ('orientation' in input) {
+    return stringifyLinearGradient(input);
+  } else if ('shape' in input) {
+    return stringifyRadialGradient(input);
+  } else if ('angle' in input) {
+    return stringifyConicGradient(input);
+  } else {
+    return '';
+  }
 }
